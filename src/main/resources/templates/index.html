@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Страница регистрации</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="/login/fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="/login/css/style.css">
+</head>
+<body>
+
+    <div class="main">
+
+        <!-- Sign up form -->
+        <section class="signup">
+            <div class="container">
+                <div class="signup-content">
+                    <div class="signup-form">
+                        <h2 class="form-title">Регистрация</h2>
+                        <form method="POST" class="register-form" id="register-form"
+                              th:action="@{/saveUsers}" th:object="${peoples}">
+                            <div class="form-group">
+                                <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" name="name" id="name" placeholder="Your Name"
+                                th:field="*{name}"/>
+                            </div>
+                            <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
+                            </div>
+                            <div class="form-group">
+                                <label for="email"><i class="zmdi zmdi-email"></i></label>
+                                <input type="email" name="email" id="email" placeholder="Your Email"
+                                th:field="*{email}"/>
+                            </div>
+                            <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
+                            </div>
+                            <div class="form-group">
+                                <label for="login"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" name="login" id="login" placeholder="Your Login"
+                                       th:field="*{login}"/>
+                            </div>
+                            <div style="color:red" th:if="${#fields.hasErrors('login')}" th:errors="*{login}">
+                            </div>
+                            <div style="color:red" th:text="${loginError}"></div>
+                            <div class="form-group">
+                                <label for="pass"><i class="zmdi zmdi-lock"></i></label>
+                                <input type="password" name="pass" id="pass" placeholder="Password"
+                                th:field="*{password}"/>
+                            </div>
+                            <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
+                            </div>
+                            <div class="form-group">
+                                <label for="re_pass"><i class="zmdi zmdi-lock-outline"></i></label>
+                                <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password"
+                                th:field="*{confirm_password}"/>
+                            </div>
+                            <div style="color:red" th:if="${#fields.hasErrors('confirm_password')}"
+                                 th:errors="*{confirm_password}">
+                            </div>
+                            <div style="color:red" th:text="${passwordError}"></div>
+                            <input th:value="${authority}" name="authority" type="hidden">
+                            <div class="form-group">
+                                <label for="age"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="number" name="age" id="age" placeholder="Your Age"
+                                       th:field="*{age}"/>
+                            </div>
+                            <div style="color:red" th:if="${#fields.hasErrors('age')}"
+                                 th:errors="*{age}">
+                            </div>
+                            <div class="form-group form-button">
+                                <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="signup-image">
+                        <figure><img src="/login/images/signup-image.jpg" alt="sing up image"></figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sing in  Form -->
+        <section class="sign-in">
+            <div class="container">
+                <div class="signin-content">
+                    <div class="signin-image">
+                        <figure><img src="/login/images/signin-image.png" alt="sing up image"></figure>
+                        <a href="#" class="signup-image-link">Create an account</a>
+                    </div>
+
+                    <div class="signin-form">
+                        <h2 class="form-title">Авторизация</h2>
+                        <form method="POST" class="register-form" id="login-form" th:action="@{/perform-login}">
+                            <div class="form-group">
+                                <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" name="login" id="your_name" placeholder="Your Login"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
+                                <input type="password" name="password" id="your_pass" placeholder="Password"/>
+                            </div>
+                            <div class="form-group form-button">
+                                <input type="submit" name="signin" id="signin" class="form-submit" value="Log in"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- JS -->
+    <script src="/login/vendor/jquery/jquery.min.js"></script>
+    <script src="/login/js/main.js"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>
