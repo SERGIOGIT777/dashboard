@@ -25,14 +25,14 @@ public class LoginController {
     @Autowired
     private PeopleRepository peopleRepository;
 
-//    @GetMapping("/")
+    //    @GetMapping("/")
 //    public ModelAndView loginPage(){
 //        ModelAndView mav = new ModelAndView("index");
 //        mav.addObject("peoples", new Peoples());
 //        mav.addObject("authority", "ROLE_USER");
 //        return mav;
 //    }
-
+    @Transactional
     @GetMapping
     public ModelAndView addUserForm(Model model) {
         ModelAndView mav = new ModelAndView("index");
@@ -40,6 +40,7 @@ public class LoginController {
         mav.addObject("peoples", new Peoples());
         return mav;
     }
+
     @Transactional
     @PostMapping
     public String saveUsers(@ModelAttribute("peoples") @Valid Peoples peoples,
@@ -61,7 +62,7 @@ public class LoginController {
         if (list.size() > 0) {
             model.addAttribute("loginError", "Пользователь с таким логином уже существует");
             return "index";
-        } else if (list.isEmpty()){
+        } else if (list.isEmpty()) {
             peoples.setPassword(passwordEncoder.encode(peoples.getPassword()));
             peopleRepository.save(peoples);
             model.addAttribute("peoples", peopleRepository.findAll());
