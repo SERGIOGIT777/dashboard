@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping({"/", "/login"})
+@RequestMapping("/")
 public class LoginController {
 
     BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -24,15 +24,15 @@ public class LoginController {
     @Autowired
     private PeopleRepository peopleRepository;
 
-    @GetMapping
-    public ModelAndView loginPage(){
-        ModelAndView mav = new ModelAndView("index");
-        mav.addObject("peoples", new Peoples());
-        mav.addObject("authority", "ROLE_USER");
-        return mav;
-    }
+//    @GetMapping("/")
+//    public ModelAndView loginPage(){
+//        ModelAndView mav = new ModelAndView("index");
+//        mav.addObject("peoples", new Peoples());
+//        mav.addObject("authority", "ROLE_USER");
+//        return mav;
+//    }
 
-    @GetMapping("/saveUsers")
+    @GetMapping
     public ModelAndView addUserForm(Model model) {
         ModelAndView mav = new ModelAndView("index");
         model.addAttribute("authority", "ROLE_USER");
@@ -40,7 +40,7 @@ public class LoginController {
         return mav;
     }
 
-    @PostMapping("/saveUsers")
+    @PostMapping
     public String saveUsers(@ModelAttribute("peoples") @Valid Peoples peoples,
                             BindingResult result, Model model) {
 
@@ -65,6 +65,6 @@ public class LoginController {
             peopleRepository.save(peoples);
             model.addAttribute("peoples", peopleRepository.findAll());
         }
-        return "redirect:/login";
+        return "redirect:/";
     }
 }

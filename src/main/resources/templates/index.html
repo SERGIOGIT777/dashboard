@@ -23,7 +23,7 @@
                     <div class="signup-form">
                         <h2 class="form-title">Регистрация</h2>
                         <form method="POST" class="register-form" id="register-form"
-                              th:action="@{/saveUsers}" th:object="${peoples}">
+                              th:action="@{/}" th:object="${peoples}">
                             <div class="form-group">
                                 <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
                                 <input type="text" name="name" id="name" placeholder="Your Name"
@@ -64,8 +64,9 @@
                             <div style="color:red" th:text="${passwordError}"></div>
                             <input th:value="${authority}" name="authority" type="hidden">
                             <div class="form-group">
-                                <label for="age"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="number" name="age" id="age" placeholder="Your Age"
+                                <label for="age"><i class="zmdi zmdi-account material-icons-name"></i>
+                                </label>
+                                <input type="text" name="age" id="age" placeholder="Your Age (number)"
                                        th:field="*{age}"/>
                             </div>
                             <div style="color:red" th:if="${#fields.hasErrors('age')}"
