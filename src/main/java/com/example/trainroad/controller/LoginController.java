@@ -5,6 +5,7 @@ import com.example.trainroad.repository.PeopleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,7 +40,7 @@ public class LoginController {
         mav.addObject("peoples", new Peoples());
         return mav;
     }
-
+    @Transactional
     @PostMapping
     public String saveUsers(@ModelAttribute("peoples") @Valid Peoples peoples,
                             BindingResult result, Model model) {
